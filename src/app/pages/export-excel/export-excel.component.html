@@ -1,0 +1,6 @@
+<form [formGroup]="form">
+    <div class="col-md-8 form-group">        
+        <input type="file" class="form-control" formControlName="fileField" (change)="upload($event)" placeholder="Upload file" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">        
+      </div>
+</form>
+   
