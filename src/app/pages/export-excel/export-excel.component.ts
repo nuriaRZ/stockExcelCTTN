@@ -264,7 +264,7 @@ export class ExportExcelComponent implements OnInit {
 
       for (let i = 0; i < chaquetas.length; i++) {
         const element = chaquetas[i];
-        let chaquetasRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0, 0]);
+        let chaquetasRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
         chaqueRow.eachCell(cell =>{
           if(cell['_column']['_number'] > 2){
             cell.alignment = {
@@ -297,7 +297,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < pantalones.length; i++) {
           const element = pantalones[i];
-          let pantalonesRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0, 0]);
+          let pantalonesRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
           pantRow.eachCell(cell =>{   
             let indexColor = 0;
             pantalonesRow.eachCell(data =>{
@@ -327,7 +327,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < tejanos.length; i++) {
           const element = tejanos[i];
-          let tejanosRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0, 0]);
+          let tejanosRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
           tejRow.eachCell(cell =>{
             let indexColor = 0;
             tejanosRow.eachCell(data =>{
@@ -357,7 +357,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < camisas.length; i++) {
           const element = camisas[i];
-          let camiRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0, 0]);
+          let camiRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
           camisasRow.eachCell(cell =>{
             let indexColor = 0;
             camiRow.eachCell(data =>{
@@ -387,7 +387,7 @@ export class ExportExcelComponent implements OnInit {
         };
     for (let i = 0; i < jerseys.length; i++) {
           const element = jerseys[i];
-          let jerseysRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0, 0]);
+          let jerseysRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0,]);
           jerRow.eachCell(cell =>{
             let indexColor = 0;
             jerseysRow.eachCell(data =>{
@@ -417,7 +417,7 @@ export class ExportExcelComponent implements OnInit {
         };
      for (let i = 0; i < cazadoras.length; i++) {
           const element = cazadoras[i];
-          let cazadorasRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0, 0]);
+          let cazadorasRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0]);
           cazRow.eachCell(cell =>{
             let indexColor = 0;
             cazadorasRow.eachCell(data =>{
@@ -446,7 +446,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < polos.length; i++) {
           const element = polos[i];
-          let poloRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0, 0]);
+          let poloRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0]);
           polosRow.eachCell(cell =>{
             let indexColor = 0;
             poloRow.eachCell(data =>{
@@ -475,7 +475,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < chalecos.length; i++) {
           const element = chalecos[i];
-          let chalecosRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0, 0]);
+          let chalecosRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0]);
           chalRow.eachCell(cell =>{
             let indexColor = 0;
             chalecosRow.eachCell(data =>{
@@ -504,7 +504,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < bermudas.length; i++) {
           const element = bermudas[i];
-          let bermudasRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0, 0]);
+          let bermudasRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
           bermRow.eachCell(cell =>{
             let indexColor = 0;
             bermudasRow.eachCell(data =>{
@@ -533,7 +533,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < cinturones.length; i++) {
           const element = cinturones[i];
-          let cinturonesRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0, 0]);
+          let cinturonesRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0]);
           cintoRow.eachCell(cell =>{
             let indexColor = 0;
             cinturonesRow.eachCell(data =>{
@@ -562,7 +562,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < corbatas.length; i++) {
           const element = corbatas[i];
-          let corbatasRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0, 0]);
+          let corbatasRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
           corbRow.eachCell(cell =>{
             let indexColor = 0;
             corbatasRow.eachCell(data =>{
@@ -591,7 +591,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < carteras.length; i++) {
           const element = carteras[i];
-          let carterasRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0, 0]);
+          let carterasRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
           cartRow.eachCell(cell =>{
             let indexColor = 0;
             carterasRow.eachCell(data =>{
@@ -620,7 +620,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < complementos.length; i++) {
           const element = complementos[i];
-          let complementosRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0, 0]);
+          let complementosRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
           complRow.eachCell(cell =>{
             let indexColor = 0;
             complementosRow.eachCell(data =>{
@@ -649,7 +649,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < calzado.length; i++) {
           const element = calzado[i];
-          let calzadosRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0, 0]);
+          let calzadosRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
           calzRow.eachCell(cell =>{
             let indexColor = 0;
             calzadosRow.eachCell(data =>{              
