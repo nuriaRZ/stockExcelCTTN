@@ -19,7 +19,8 @@ export class ExportExcelComponent implements OnInit {
   arrayBuffer: any;
   fileList: any;
   data: any = [];
-  colorsCells = ['FFD9D9D9', 'FFBFBFBF', 'FFA6A6A6', 'FF919191', 'FF808080', 'FF757575', 'FF686868', 'FF585858', 'FF525252', 'FF4C4C4C' ]
+  colorsCells = ['FFD9D9D9','FFBFBFBF', 'FFA6A6A6', 'FF919191', 'FF808080', 'FF808080', 'FF919191', 'FFA6A6A6', 'FFBFBFBF', 'FFD9D9D9'];
+  colorsPalette = ['FFD9D9D9', 'FFBFBFBF', 'FFA6A6A6', 'FF919191', 'FF808080', 'FF757575', 'FF686868', 'FF585858', 'FF525252', 'FF4C4C4C' ];
   
 
   constructor() { }
@@ -218,7 +219,7 @@ export class ExportExcelComponent implements OnInit {
       
     });
     let tallaColumn = worksheet.getColumn(4);
-   let trajeRow = worksheet.addRow(['REF', 'TRAJES', '44', '46', '48', '50', '52', '54', '56', '58' ]);
+   let trajeRow = worksheet.addRow(['REF', 'TRAJES','42', '44', '46', '48', '50', '52', '54', '56', '58', '60' ]);
      trajeRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
      trajeRow.fill = {
       type: 'pattern',
@@ -229,7 +230,7 @@ export class ExportExcelComponent implements OnInit {
       
       for (let i = 0; i < trajes.length; i++) {
         const element = trajes[i];
-       let trajesRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0, 0]);
+       let trajesRow = worksheet.addRow([element.referencia, element.descripcion,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
         trajeRow.eachCell(cell =>{
           if(cell['_column']['_number'] > 2){
             cell.alignment = {
@@ -238,15 +239,18 @@ export class ExportExcelComponent implements OnInit {
             }
           }
           let indexColor = 0;
-            trajesRow.eachCell(data =>{
+            trajesRow.eachCell(data =>{              
+              console.log('data', data);
+              console.log('indexColor', indexColor);
              this.addStylesInCell(data, indexColor);
                   element.talla.forEach(size => {
                     if(cell.value == size.index && cell['_column']['_number'] == data['_column']['_number']){
                       data.value = size.value                      
                   }
               })
-              indexColor++;
-                
+              if(data['_column']['_number'] > 2){
+                indexColor++;                
+              }
             })
         })
           
@@ -254,7 +258,7 @@ export class ExportExcelComponent implements OnInit {
         
   
     
-   let chaqueRow = worksheet.addRow(['REF', 'CHAQUETAS', '46', '48', '50', '52', '54', '56', '58' ]);
+   let chaqueRow = worksheet.addRow(['REF', 'CHAQUETAS', '42', '44', '46', '48', '50', '52', '54', '56', '58', '60' ]);
    chaqueRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
    chaqueRow.fill = {
       type: 'pattern',
@@ -264,7 +268,7 @@ export class ExportExcelComponent implements OnInit {
 
       for (let i = 0; i < chaquetas.length; i++) {
         const element = chaquetas[i];
-        let chaquetasRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
+        let chaquetasRow = worksheet.addRow([element.referencia, element.descripcion,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
         chaqueRow.eachCell(cell =>{
           if(cell['_column']['_number'] > 2){
             cell.alignment = {
@@ -280,7 +284,9 @@ export class ExportExcelComponent implements OnInit {
                       data.value = size.value                      
                     }
                   })
-            indexColor++;      
+            if(data['_column']['_number'] > 2){
+              indexColor++;                
+            }     
                 
           })
         })
@@ -288,7 +294,7 @@ export class ExportExcelComponent implements OnInit {
     
 
     
-    let pantRow = worksheet.addRow(['REF', 'PANTALONES', '38', '40', '42', '44', '46', '48', '50' ]);
+    let pantRow = worksheet.addRow(['REF', 'PANTALONES','36', '38', '40', '42', '44', '46', '48', '50', '52', '' ]);
     pantRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"}, align: 'center', };
     pantRow.fill = {
         type: 'pattern',
@@ -297,7 +303,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < pantalones.length; i++) {
           const element = pantalones[i];
-          let pantalonesRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
+          let pantalonesRow = worksheet.addRow([element.referencia, element.descripcion,  0,  0, 0, 0, 0, 0, 0, 0, 0, 0]);
           pantRow.eachCell(cell =>{   
             let indexColor = 0;
             pantalonesRow.eachCell(data =>{
@@ -313,12 +319,14 @@ export class ExportExcelComponent implements OnInit {
                     data.value = size.value                      
                   }
                 })
-                indexColor++;    
+                if(data['_column']['_number'] > 2){
+                  indexColor++;                
+                }  
             })
           })
         }
     
-    let tejRow = worksheet.addRow(['REF', 'TEJANOS', '38', '40', '42', '44', '46', '48', '50' ]);
+    let tejRow = worksheet.addRow(['REF', 'TEJANOS','36', '38', '40', '42', '44', '46', '48', '50','52', '', '' ]);
     tejRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
     tejRow.fill = {
         type: 'pattern',
@@ -327,7 +335,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < tejanos.length; i++) {
           const element = tejanos[i];
-          let tejanosRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
+          let tejanosRow = worksheet.addRow([element.referencia, element.descripcion,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
           tejRow.eachCell(cell =>{
             let indexColor = 0;
             tejanosRow.eachCell(data =>{
@@ -343,159 +351,14 @@ export class ExportExcelComponent implements OnInit {
                     data.value = size.value                      
                   }
                 })
-                indexColor++;  
+                if(data['_column']['_number'] > 2){
+                  indexColor++;                
+                }
             })
           })
         }
 
-    let camisasRow = worksheet.addRow(['REF', 'CAMISAS', '38', '40', '42', '44', '46', '48', '50' ]);
-    camisasRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
-    camisasRow.fill = {
-        type: 'pattern',
-        pattern:'solid',
-        fgColor:{ argb:'000080' }
-        };
-        for (let i = 0; i < camisas.length; i++) {
-          const element = camisas[i];
-          let camiRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
-          camisasRow.eachCell(cell =>{
-            let indexColor = 0;
-            camiRow.eachCell(data =>{
-              if(cell['_column']['_number'] > 2){
-                cell.alignment = {
-                  vertical: 'middle',
-                  horizontal: 'center'
-                }
-              }
-              this.addStylesInCell(data, indexColor);
-                element.talla.forEach(size => {
-                  if(cell.value == size.index && cell['_column']['_number'] == data['_column']['_number']){
-                    data.value = size.value                      
-                  }
-                })
-                indexColor++;  
-            })
-          })
-        }
-
-    let jerRow = worksheet.addRow(['REF', 'JERSEYS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '' ]);
-    jerRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
-    jerRow.fill = {
-        type: 'pattern',
-        pattern:'solid',
-        fgColor:{ argb:'000080' }
-        };
-    for (let i = 0; i < jerseys.length; i++) {
-          const element = jerseys[i];
-          let jerseysRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0,]);
-          jerRow.eachCell(cell =>{
-            let indexColor = 0;
-            jerseysRow.eachCell(data =>{
-              if(cell['_column']['_number'] > 2){
-                cell.alignment = {
-                  vertical: 'middle',
-                  horizontal: 'center'
-                }
-              }
-              this.addStylesInCell(data, indexColor);
-                element.talla.forEach(size => {
-                  if(cell.value == size.index && cell['_column']['_number'] == data['_column']['_number']){
-                    data.value = size.value                      
-                  }
-                })
-                indexColor++;                  
-            })
-          })
-        }
-
-    let cazRow = worksheet.addRow(['REF', 'CAZADORAS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '' ]);
-    cazRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
-    cazRow.fill = {
-        type: 'pattern',
-        pattern:'solid',
-        fgColor:{ argb:'000080' }
-        };
-     for (let i = 0; i < cazadoras.length; i++) {
-          const element = cazadoras[i];
-          let cazadorasRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0]);
-          cazRow.eachCell(cell =>{
-            let indexColor = 0;
-            cazadorasRow.eachCell(data =>{
-              if(cell['_column']['_number'] > 2){
-                cell.alignment = {
-                  vertical: 'middle',
-                  horizontal: 'center'
-                }
-              }
-              this.addStylesInCell(data, indexColor);
-                element.talla.forEach(size => {
-                  if(cell.value == size.index && cell['_column']['_number'] == data['_column']['_number']){
-                    data.value = size.value                      
-                  }
-                })
-                indexColor++; 
-            })  
-          })
-        }
-    let polosRow = worksheet.addRow(['REF', 'POLOS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '' ]);
-    polosRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
-    polosRow.fill = {
-        type: 'pattern',
-        pattern:'solid',
-        fgColor:{ argb:'000080' }
-        };
-        for (let i = 0; i < polos.length; i++) {
-          const element = polos[i];
-          let poloRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0]);
-          polosRow.eachCell(cell =>{
-            let indexColor = 0;
-            poloRow.eachCell(data =>{
-              if(cell['_column']['_number'] > 2){
-                cell.alignment = {
-                  vertical: 'middle',
-                  horizontal: 'center'
-                }
-              }
-              this.addStylesInCell(data, indexColor);
-                element.talla.forEach(size => {
-                  if(cell.value == size.index && cell['_column']['_number'] == data['_column']['_number']){
-                    data.value = size.value                      
-                  }
-                })
-                   indexColor++;  
-            })
-          })
-        }
-    let chalRow = worksheet.addRow(['REF', 'CHALECOS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '' ]);
-    chalRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
-    chalRow.fill = {
-        type: 'pattern',
-        pattern:'solid',
-        fgColor:{ argb:'000080' }
-        };
-        for (let i = 0; i < chalecos.length; i++) {
-          const element = chalecos[i];
-          let chalecosRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0]);
-          chalRow.eachCell(cell =>{
-            let indexColor = 0;
-            chalecosRow.eachCell(data =>{
-              if(cell['_column']['_number'] > 2){
-                cell.alignment = {
-                  vertical: 'middle',
-                  horizontal: 'center'
-                }
-              }
-              this.addStylesInCell(data, indexColor);
-                element.talla.forEach(size => {
-                  if(cell.value == size.index && cell['_column']['_number'] == data['_column']['_number']){
-                    data.value = size.value                      
-                  }
-                })
-                   indexColor++;  
-            })
-          })
-        }
-    let bermRow = worksheet.addRow(['REF', 'BERMUDAS', '38', '40', '42', '44', '46', '48', '50' ]);
+    let bermRow = worksheet.addRow(['REF', 'BERMUDAS','36', '38', '40', '42', '44', '46', '48', '50', '52', '', '' ]);
     bermRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
     bermRow.fill = {
         type: 'pattern',
@@ -504,7 +367,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < bermudas.length; i++) {
           const element = bermudas[i];
-          let bermudasRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
+          let bermudasRow = worksheet.addRow([element.referencia, element.descripcion,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
           bermRow.eachCell(cell =>{
             let indexColor = 0;
             bermudasRow.eachCell(data =>{
@@ -520,11 +383,172 @@ export class ExportExcelComponent implements OnInit {
                     data.value = size.value                      
                   }
                 })
-                   indexColor++;  
+                if(data['_column']['_number'] > 2){
+                  indexColor++;                
+                }
+            })
+          })
+        }    
+
+    let camisasRow = worksheet.addRow(['REF', 'CAMISAS', '', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '', '']);
+    camisasRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
+    camisasRow.fill = {
+        type: 'pattern',
+        pattern:'solid',
+        fgColor:{ argb:'000080' }
+        };
+        for (let i = 0; i < camisas.length; i++) {
+          const element = camisas[i];
+          let camiRow = worksheet.addRow([element.referencia, element.descripcion,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+          camisasRow.eachCell(cell =>{
+            let indexColor = 0;
+            camiRow.eachCell(data =>{
+              if(cell['_column']['_number'] > 2){
+                cell.alignment = {
+                  vertical: 'middle',
+                  horizontal: 'center'
+                }
+              }
+              this.addStylesInCell(data, indexColor);
+                element.talla.forEach(size => {
+                  if(cell.value == size.index && cell['_column']['_number'] == data['_column']['_number']){
+                    data.value = size.value                      
+                  }
+                })
+                if(data['_column']['_number'] > 2){
+                  indexColor++;                
+                }
             })
           })
         }
-    let cintoRow = worksheet.addRow(['REF', 'CINTURONES', '90', '95', '100', '105', '115', ]);
+
+    let jerRow = worksheet.addRow(['REF', 'JERSEYS','', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '', '' ]);
+    jerRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
+    jerRow.fill = {
+        type: 'pattern',
+        pattern:'solid',
+        fgColor:{ argb:'000080' }
+        };
+    for (let i = 0; i < jerseys.length; i++) {
+          const element = jerseys[i];
+          let jerseysRow = worksheet.addRow([element.referencia, element.descripcion,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]);
+          jerRow.eachCell(cell =>{
+            let indexColor = 0;
+            jerseysRow.eachCell(data =>{
+              if(cell['_column']['_number'] > 2){
+                cell.alignment = {
+                  vertical: 'middle',
+                  horizontal: 'center'
+                }
+              }
+              this.addStylesInCell(data, indexColor);
+                element.talla.forEach(size => {
+                  if(cell.value == size.index && cell['_column']['_number'] == data['_column']['_number']){
+                    data.value = size.value                      
+                  }
+                })
+                if(data['_column']['_number'] > 2){
+                  indexColor++;                
+                }               
+            })
+          })
+        }
+
+    let cazRow = worksheet.addRow(['REF', 'CAZADORAS', '','XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '' ]);
+    cazRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
+    cazRow.fill = {
+        type: 'pattern',
+        pattern:'solid',
+        fgColor:{ argb:'000080' }
+        };
+     for (let i = 0; i < cazadoras.length; i++) {
+          const element = cazadoras[i];
+          let cazadorasRow = worksheet.addRow([element.referencia, element.descripcion,   0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+          cazRow.eachCell(cell =>{
+            let indexColor = 0;
+            cazadorasRow.eachCell(data =>{
+              if(cell['_column']['_number'] > 2){
+                cell.alignment = {
+                  vertical: 'middle',
+                  horizontal: 'center'
+                }
+              }
+              this.addStylesInCell(data, indexColor);
+                element.talla.forEach(size => {
+                  if(cell.value == size.index && cell['_column']['_number'] == data['_column']['_number']){
+                    data.value = size.value                      
+                  }
+                })
+                if(data['_column']['_number'] > 2){
+                  indexColor++;                
+                }
+            })  
+          })
+        }
+    let polosRow = worksheet.addRow(['REF', 'POLOS', '','XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '' ]);
+    polosRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
+    polosRow.fill = {
+        type: 'pattern',
+        pattern:'solid',
+        fgColor:{ argb:'000080' }
+        };
+        for (let i = 0; i < polos.length; i++) {
+          const element = polos[i];
+          let poloRow = worksheet.addRow([element.referencia, element.descripcion,   0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+          polosRow.eachCell(cell =>{
+            let indexColor = 0;
+            poloRow.eachCell(data =>{
+              if(cell['_column']['_number'] > 2){
+                cell.alignment = {
+                  vertical: 'middle',
+                  horizontal: 'center'
+                }
+              }
+              this.addStylesInCell(data, indexColor);
+                element.talla.forEach(size => {
+                  if(cell.value == size.index && cell['_column']['_number'] == data['_column']['_number']){
+                    data.value = size.value                      
+                  }
+                })
+                if(data['_column']['_number'] > 2){
+                  indexColor++;                
+                }
+            })
+          })
+        }
+    let chalRow = worksheet.addRow(['REF', 'CHALECOS','', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '' ]);
+    chalRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
+    chalRow.fill = {
+        type: 'pattern',
+        pattern:'solid',
+        fgColor:{ argb:'000080' }
+        };
+        for (let i = 0; i < chalecos.length; i++) {
+          const element = chalecos[i];
+          let chalecosRow = worksheet.addRow([element.referencia, element.descripcion,   0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+          chalRow.eachCell(cell =>{
+            let indexColor = 0;
+            chalecosRow.eachCell(data =>{
+              if(cell['_column']['_number'] > 2){
+                cell.alignment = {
+                  vertical: 'middle',
+                  horizontal: 'center'
+                }
+              }
+              this.addStylesInCell(data, indexColor);
+                element.talla.forEach(size => {
+                  if(cell.value == size.index && cell['_column']['_number'] == data['_column']['_number']){
+                    data.value = size.value                      
+                  }
+                })
+                if(data['_column']['_number'] > 2){
+                  indexColor++;                
+                }
+            })
+          })
+        }
+    
+    let cintoRow = worksheet.addRow(['REF', 'CINTURONES','','', '90', '95', '100', '105', '115','','', ]);
     cintoRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
     cintoRow.fill = {
         type: 'pattern',
@@ -533,7 +557,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < cinturones.length; i++) {
           const element = cinturones[i];
-          let cinturonesRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0]);
+          let cinturonesRow = worksheet.addRow([element.referencia, element.descripcion,   0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
           cintoRow.eachCell(cell =>{
             let indexColor = 0;
             cinturonesRow.eachCell(data =>{
@@ -549,11 +573,13 @@ export class ExportExcelComponent implements OnInit {
                     data.value = size.value                      
                   }
                 })
-                   indexColor++;  
+                if(data['_column']['_number'] > 2){
+                  indexColor++;                
+                }  
             })
           })
         }
-    let corbRow = worksheet.addRow(['REF', 'CORBATAS',  ]);
+    let corbRow = worksheet.addRow(['REF', 'CORBATAS','','','','','','','','',''  ]);
     corbRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
     corbRow.fill = {
         type: 'pattern',
@@ -562,7 +588,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < corbatas.length; i++) {
           const element = corbatas[i];
-          let corbatasRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
+          let corbatasRow = worksheet.addRow([element.referencia, element.descripcion,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
           corbRow.eachCell(cell =>{
             let indexColor = 0;
             corbatasRow.eachCell(data =>{
@@ -578,11 +604,13 @@ export class ExportExcelComponent implements OnInit {
                     data.value = size.value                      
                   }
                 })
-                   indexColor++;  
+                if(data['_column']['_number'] > 2){
+                  indexColor++;                
+                } 
             })
           })
         }
-    let cartRow = worksheet.addRow(['REF', 'CARTERAS', '38', '40', '42', '44', '46', '48', '50' ]);
+    let cartRow = worksheet.addRow(['REF', 'CARTERAS','', '38', '40', '42', '44', '46', '48', '50','' ]);
     cartRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
     cartRow.fill = {
         type: 'pattern',
@@ -591,7 +619,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < carteras.length; i++) {
           const element = carteras[i];
-          let carterasRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
+          let carterasRow = worksheet.addRow([element.referencia, element.descripcion,   0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
           cartRow.eachCell(cell =>{
             let indexColor = 0;
             carterasRow.eachCell(data =>{
@@ -607,11 +635,13 @@ export class ExportExcelComponent implements OnInit {
                     data.value = size.value                      
                   }
                 })
-                   indexColor++;  
+                if(data['_column']['_number'] > 2){
+                  indexColor++;                
+                } 
             })
           })
         }
-    let complRow = worksheet.addRow(['REF', 'COMPLEMENTOS', '38', '40', '42', '44', '46', '48', '50' ]);
+    let complRow = worksheet.addRow(['REF', 'COMPLEMENTOS','', '38', '40', '42', '44', '46', '48', '50','' ]);
     complRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
     complRow.fill = {
         type: 'pattern',
@@ -620,7 +650,7 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < complementos.length; i++) {
           const element = complementos[i];
-          let complementosRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
+          let complementosRow = worksheet.addRow([element.referencia, element.descripcion,   0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
           complRow.eachCell(cell =>{
             let indexColor = 0;
             complementosRow.eachCell(data =>{
@@ -636,11 +666,13 @@ export class ExportExcelComponent implements OnInit {
                     data.value = size.value                      
                   }
                 })
-                   indexColor++;  
+                if(data['_column']['_number'] > 2){
+                  indexColor++;                
+                }
             })
           })
         }
-    let calzRow = worksheet.addRow(['REF', 'CALZADO', '39', '40', '41', '42', '43', '44', '45' ]);
+    let calzRow = worksheet.addRow(['REF', 'CALZADO','', '39', '40', '41', '42', '43', '44', '45','', '' ]);
     calzRow.font = { name: 'Arial', family: 4, size: 10, bold: true, color: {argb: "ffffff"} };
     calzRow.fill = {
         type: 'pattern',
@@ -649,7 +681,8 @@ export class ExportExcelComponent implements OnInit {
         };
         for (let i = 0; i < calzado.length; i++) {
           const element = calzado[i];
-          let calzadosRow = worksheet.addRow([element.referencia, element.descripcion,  element.color, 0, 0, 0, 0, 0, 0]);
+          let calzadosRow = worksheet.addRow([element.referencia, element.descripcion,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+         console.log('calzRow', calzRow);
           calzRow.eachCell(cell =>{
             let indexColor = 0;
             calzadosRow.eachCell(data =>{              
@@ -657,21 +690,22 @@ export class ExportExcelComponent implements OnInit {
                 cell.alignment = {
                   vertical: 'middle',
                   horizontal: 'center'
-                }
-              }              
+                }  
+              } 
+              
+
               this.addStylesInCell(data, indexColor);
                 element.talla.forEach(size => {
                   if(cell.value == size.index && cell['_column']['_number'] == data['_column']['_number']){
                     data.value = size.value                      
                   }
                 })
-                   indexColor++;  
+                if(data['_column']['_number'] > 2){
+                  indexColor++;                
+                }  
             })
           })
         }
-
-    // worksheet.insertRows(1, trajes);
-
      workbook.xlsx.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
       FileSaver.saveAs(blob, 'inventarioCotton.xlsx');
@@ -680,7 +714,7 @@ export class ExportExcelComponent implements OnInit {
     });
   }
 
-  paintCell(cell: any, color){
+  paintCell(cell: any, color){    
     cell.fill = {
       type: "pattern",
       pattern: "solid",
@@ -696,13 +730,50 @@ export class ExportExcelComponent implements OnInit {
     }
   }
 
-  addStylesInCell(cell: any, color){
+  addStylesInCell(cell: any, color ){
     if(cell['_column']['_number'] > 2){
       cell.alignment = {
         vertical: 'middle',
         horizontal: 'center'
       }
-     this.paintCell(cell, this.colorsCells[color]);
+
+      // let mitad = Math.trunc(rowLength/2);
+      // console.log('mitad', mitad);
+      
+      this.paintCell(cell, this.colorsCells[color]); 
+       
+      
+
+      
+      // switch (cell['_column']['_number']) {
+      //   case 3:
+      //     this.paintCell(cell, this.colorsCells[0]);          
+      //     break;
+      //     case 4:
+      //     this.paintCell(cell, this.colorsCells[1]);          
+      //     break;
+      //     case 5:
+      //     this.paintCell(cell, this.colorsCells[2]);          
+      //     break;
+      //     case 6:
+      //     this.paintCell(cell, this.colorsCells[4]);          
+      //     break;
+      //     case 7:
+      //     this.paintCell(cell, this.colorsCells[4]);          
+      //     break;
+      //     case 8:
+      //     this.paintCell(cell, this.colorsCells[3]);          
+      //     break;
+      //     case 9:
+      //     this.paintCell(cell, this.colorsCells[2]);          
+      //     break;
+      //     case 10:
+      //     this.paintCell(cell, this.colorsCells[1]);          
+      //     break;
+      
+      //   default:
+      //     break;
+      // }
     }else{
       cell.border = {
         top: { style: "thin" },

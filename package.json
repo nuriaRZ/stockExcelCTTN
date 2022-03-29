@@ -41,6 +41,7 @@
     "@types/electron": "^1.6.10",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "angular-cli-ghpages": "^1.0.0",
     "autoprefixer": "^10.4.2",
     "electron": "^17.1.2",
     "jasmine-core": "~4.0.0",
